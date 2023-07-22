@@ -187,7 +187,11 @@ class DataCleaningApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Data Cleaning App (By DungPham2209)")
-
+        
+        # Thêm một nhãn để hiển thị đường dẫn file
+        self.file_path_label = ttk.Label(root, text="", font=("Helvetica", 10), foreground="gray")
+        self.file_path_label.pack()
+        
         # Set the window size and put the app in fullscreen mode
         window_width = self.root.winfo_screenwidth() * 0.9
         window_height = self.root.winfo_screenheight() * 0.9
@@ -250,6 +254,15 @@ class DataCleaningApp:
 
         clean_button = ttk.Button(button_frame, text="Clean Data", command=self.clean_data)
         clean_button.pack(side="left", padx=5)
+        
+        load_button = ttk.Button(button_frame, text="Clean Data Duplicate", command=self.reload_data)
+        load_button.pack(side="left", padx=5)
+        
+        load_button = ttk.Button(button_frame, text="Clear Empty Data", command=self.reload_data)
+        load_button.pack(side="left", padx=5)
+        
+        load_button = ttk.Button(button_frame, text="Drop 2 Last Column", command=self.reload_data)
+        load_button.pack(side="left", padx=5)
 
 
     def reload_data(self):
@@ -265,6 +278,9 @@ class DataCleaningApp:
             df = pd.read_csv(file_path)
             self.display_data(df)
             self.current_file_path = file_path
+            
+            # Cập nhật nội dung của nhãn với đường dẫn file đã chọn
+            self.file_path_label.config(text=f"File path: {file_path}")
 
     def display_data(self, df):
         """Display DataFrame in Treeview widget"""
