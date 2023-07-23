@@ -188,7 +188,6 @@ class DataCleaningApp:
         self.root = root
         self.root.title("Data Cleaning App (By DungPham2209)")
         
-        # Thêm một nhãn để hiển thị đường dẫn file
         self.file_path_label = ttk.Label(root, text="", font=("Helvetica", 10), foreground="gray")
         self.file_path_label.pack()
         
@@ -278,8 +277,6 @@ class DataCleaningApp:
             df = pd.read_csv(file_path)
             self.display_data(df)
             self.current_file_path = file_path
-            
-            # Cập nhật nội dung của nhãn với đường dẫn file đã chọn
             self.file_path_label.config(text=f"File path: {file_path}")
 
     def display_data(self, df):
@@ -290,7 +287,7 @@ class DataCleaningApp:
         for col in self.data_tree["columns"]:
             col_width = max(len(str(df[col].max())), len(col))
             self.data_tree.heading(col, text=col)
-            self.data_tree.column(col, width=col_width * 10, anchor="center")  # Adjust the multiplier for desired width and anchor to center
+            self.data_tree.column(col, width=col_width * 10, anchor="center")  
         # Insert data
         for i, row in df.iterrows():
             values = [str(val) for val in row.tolist()]
